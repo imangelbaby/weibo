@@ -18,7 +18,6 @@ class SessionsController extends Controller
            'password' => 'required'
        	]);
     	if(Auth::attempt($credentials)){
-    		Auth::login($user);
 	    	session()->flash('success', '欢迎回来！');
 	        return redirect()->route('users.show', [Auth::user()]);
     	}else{
@@ -30,6 +29,8 @@ class SessionsController extends Controller
     }
     //退出登录
     public function destroy(){
-
+    	Auth::logout();
+        session()->flash('success', '您已成功退出！');
+        return redirect('login');
     }
 }
