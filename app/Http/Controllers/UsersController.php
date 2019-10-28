@@ -41,6 +41,7 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
+        //展示微博
         $statuses = $user->statuses()
                            ->orderBy('created_at', 'desc')
                            ->paginate(10);

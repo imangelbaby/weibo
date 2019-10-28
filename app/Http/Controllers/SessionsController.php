@@ -24,7 +24,7 @@ class SessionsController extends Controller
            'password' => 'required'
        	]);
     	if(Auth::attempt($credentials,$request->has('remember'))){
-    		if(Auth::user()->activate){
+    		if(Auth::user()->activated){
     			session()->flash('success', '欢迎回来！');
 		    	$fallback = route('users.show', Auth::user());
 		    	return redirect()->intended($fallback); //将页面重定向到上一次请求尝试访问的页面上
