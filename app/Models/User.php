@@ -52,4 +52,10 @@ class User extends Authenticatable
             $user->activation_token = Str::random(10);
         });
     }
+
+    //微博内容
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
 }

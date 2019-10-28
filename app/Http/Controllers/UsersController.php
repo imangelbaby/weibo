@@ -106,9 +106,7 @@ class UsersController extends Controller
 
     //邮件确认
     public function confirmEmail($token){
-        echo $token;exit;
         $user = User::where('activation_token', $token)->firstOrFail();
-        var_dump($user);exit;
         $user->activated = true;
         $user->activation_token = null;
         $user->save();
