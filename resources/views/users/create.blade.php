@@ -28,6 +28,12 @@
             <label for="password_confirmation">确认密码：</label>
             <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}">
           </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">记住我</label>
+            </div>
+          </div>
           {{ csrf_field() }}
           <button type="submit" class="btn btn-primary">注册</button>
       </form>
