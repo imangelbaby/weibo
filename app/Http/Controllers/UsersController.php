@@ -8,9 +8,9 @@ class UsersController extends Controller
 {
 
     public function __construct(){
-        
+
         $this->middleware('auth',[
-            'except'=>['show','create','store']
+            'except'=>['index','show','create','store'] //不许验证权限
         ]);
         //用于指定一些只允许未登录用户访问的动作
         $this->middleware('guest', [
@@ -20,7 +20,16 @@ class UsersController extends Controller
 
 
     public function index(){
-        return view('users.index');
+        //$users = User::all();
+        $users = User::paginate(10); //分页
+        // foreach($users as $key=>$v){
+        //     echo $v->name;
+        // }
+        // exit;
+        // echo '<pre>';
+        // var_dump($users);
+        // echo '</pre>';exit;
+        return view('users.index', compact('users'));
     }
     /**
      * 注册
