@@ -7,6 +7,18 @@ use App\Models\User;
 class UsersController extends Controller
 {
 
+    public function __construct(){
+        
+        $this->middleware('auth',[
+            'except'=>['show','create','store']
+        ]);
+        //用于指定一些只允许未登录用户访问的动作
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
+
     public function index(){
         return view('users.index');
     }
@@ -40,6 +52,7 @@ class UsersController extends Controller
     }
 
     public function edit(User $user){
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
@@ -47,7 +60,7 @@ class UsersController extends Controller
         
         $this->validate($request, [
             'name' => 'required|max:50',
-            'password' => 'nullable|confirmed|min:6'
+            'password' => 'nullable|confirmed|min:6' //nullable
         ]);
 
         $data = [];
